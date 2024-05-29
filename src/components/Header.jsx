@@ -1,8 +1,7 @@
-// Header.js
-import React, { useState } from "react";
+import React from "react";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const handleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -17,7 +16,6 @@ const Header = () => {
             <button
               onClick={handleMenu}
               className="text-xl focus:outline-none focus:bg-gray-800 rounded-full p-2"
-              aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,20 +36,20 @@ const Header = () => {
               <div className="absolute right-0 mt-10 bg-white shadow-lg rounded-md">
                 <ul>
                   <li>
-                    <button
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
-                      onClick={() => {}}
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                     >
                       Profile
-                    </button>
+                    </a>
                   </li>
                   <li>
-                    <button
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
-                      onClick={() => {}}
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                     >
                       Logout
-                    </button>
+                    </a>
                   </li>
                 </ul>
               </div>

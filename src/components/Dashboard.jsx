@@ -28,32 +28,31 @@ const Dashboard = () => {
   };
 
   return (
-    <>
-      <div className="container mx-auto mt-8 px-4">
-        <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
+    <div className="flex h-screen">
+      <div className="w-5/6 ml-auto mt-8 px-4 py-12">
+        <div className="overflow-x-auto rounded-lg">
+          <table className="min-w-full backdrop-blur-lg p-4">
             <thead>
               <tr>
                 {columns.map((column) => (
                   <th
                     key={column.id}
-                    className="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                    className="px-6 py-5 text-left text-xs leading-4 text-white font-semibold uppercase tracking-wider"
                   >
                     {column.label}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="">
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <tr key={index} className="bg-gray-50">
+                  <tr key={index} className="bg-gray-200s">
                     {columns.map((column) => (
                       <td
                         key={column.id}
-                        className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900"
+                        className="py-4 px-6  text-sm  text-gray-300 border-b-2 border-slate-400"
                       >
                         {row[column.id]}
                       </td>
@@ -67,7 +66,7 @@ const Dashboard = () => {
           <select
             onChange={(e) => handleChangeRowsPerPage(e)}
             value={rowsPerPage}
-            className="p-2 border border-gray-300 rounded-md text-sm text-gray-900"
+            className="p-2 border border-gray-300 rounded-md text-lg text-gray-900"
           >
             {[10, 30, 40].map((option) => (
               <option key={option} value={option}>
@@ -95,11 +94,11 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
+        <p className="text-center mt-4 text-sm text-gray-300">
+          &copy; RMSI (Admin Dashboard) 2024
+        </p>
       </div>
-      <p className="text-center mt-4 text-sm text-gray-600">
-        &copy; RMSI (Admin Dashboard) 2024
-      </p>
-    </>
+    </div>
   );
 };
 

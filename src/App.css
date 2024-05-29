@@ -70,8 +70,13 @@ p {
 .MuiToolbar-root {
   display: flex;
   justify-content: space-between;
-  background-color: #3f51b5;
   color: white;
+}
+#table_container {
+  width: 120%;
+}
+#pagination {
+  color: #000;
 }
 
 /* Side Menu */
@@ -113,7 +118,7 @@ p {
   background-color: #d0d0d0;
 }
 .MuiTable-root {
-  width: 100%; /* Make the table span full width */
+  width: 120%; /* Make the table span full width */
   border-collapse: collapse;
 }
 

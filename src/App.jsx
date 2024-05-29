@@ -1,12 +1,17 @@
 import React from "react";
 import MainLayout from "./components/MainLayout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   return (
-    <div className="App">
-      <MainLayout />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/dashboard" element={<MainLayout />} />
+        <Route path="/" element={<LoginForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

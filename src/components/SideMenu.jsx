@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -10,6 +11,11 @@ import {
 import { Dashboard, Assignment, People, ExitToApp } from "@mui/icons-material";
 
 const SideMenu = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("email");
+    navigate("/");
+  };
   return (
     <Drawer
       variant="permanent"
@@ -36,7 +42,7 @@ const SideMenu = () => {
           <ListItemText primary="Users" />
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem button onClick={handleLogout}>
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>

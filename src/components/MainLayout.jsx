@@ -1,21 +1,19 @@
 import React from "react";
-import { CssBaseline, Box } from "@mui/material";
 import Header from "./Header";
 import SideMenu from "./SideMenu";
 import Dashboard from "./Dashboard";
 
 const MainLayout = () => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <CssBaseline />
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <Box className="mainContent">
+      <div className="flex flex-grow">
         <SideMenu />
-        <Box className="contentArea">
+        <div className="flex-grow">
           <Dashboard />
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

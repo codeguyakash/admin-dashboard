@@ -1,64 +1,65 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+// Header.js
+import React, { useState } from "react";
 
 const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <AppBar position="fixed">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Admin Dashboard
-        </Typography>
-        <div>
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </Menu>
+    <header className="bg-gray-900 text-white shadow-md fixed top-0 w-full z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between py-4">
+          <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+          <div>
+            <button
+              onClick={handleMenu}
+              className="text-xl focus:outline-none focus:bg-gray-800 rounded-full p-2"
+              aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+            {isMenuOpen && (
+              <div className="absolute right-0 mt-10 bg-white shadow-lg rounded-md">
+                <ul>
+                  <li>
+                    <button
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                      onClick={() => {}}
+                    >
+                      Profile
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                      onClick={() => {}}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
-      </Toolbar>
-    </AppBar>
+      </div>
+    </header>
   );
 };
 

@@ -1,18 +1,20 @@
 import React from "react";
-import MainLayout from "./components/MainLayout";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/LoginForm";
 import "./App.css";
-import LoginForm from "./components/LoginForm";
+import MainLayout from "./components/MainLayout";
+import NotFound from "./components/NotFound";
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<MainLayout />} />
-        <Route path="/" element={<LoginForm />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
-}
+};
 
 export default App;

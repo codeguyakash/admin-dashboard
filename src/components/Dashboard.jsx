@@ -1,16 +1,4 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-  TablePagination,
-} from "@mui/material";
 import rows from "../data.json";
 
 const Dashboard = () => {
@@ -30,7 +18,7 @@ const Dashboard = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
 
@@ -41,62 +29,76 @@ const Dashboard = () => {
 
   return (
     <>
-      <Container>
-        <Typography variant="h4" gutterBottom>
-          Admin Dashboard
-        </Typography>
-        <TableContainer component={Paper} id="table_container">
-          <Table>
-            <TableHead>
-              <TableRow>
+      <div className="container mx-auto mt-8 px-4">
+        <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+        <div className="overflow-x-auto">
+          <table className="min-w-full">
+            <thead>
+              <tr>
                 {columns.map((column) => (
-                  <TableCell className="columns" key={column.id}>
+                  <th
+                    key={column.id}
+                    className="px-6 py-3 bg-gray-800 text-left text-xs leading-4 font-medium text-white uppercase tracking-wider"
+                  >
                     {column.label}
-                  </TableCell>
+                  </th>
                 ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
+              </tr>
+            </thead>
+            <tbody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <TableRow key={index}>
+                  <tr key={index} className="bg-gray-50">
                     {columns.map((column) => (
-                      <TableCell key={column.id}>{row[column.id]}</TableCell>
+                      <td
+                        key={column.id}
+                        className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900"
+                      >
+                        {row[column.id]}
+                      </td>
                     ))}
-                  </TableRow>
+                  </tr>
                 ))}
-            </TableBody>
-          </Table>
-          <TablePagination
-            id="pagination"
-            rowsPerPageOptions={[10, 30, 40]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            sx={{
-              bgcolor: "primary.main",
-              color: "white",
-              "& .MuiTablePagination-toolbar": {
-                bgcolor: "primary.main",
-              },
-              "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
-                {
-                  color: "white",
-                },
-              "& .MuiTablePagination-actions": {
-                color: "white",
-              },
-            }}
-          />
-        </TableContainer>
-      </Container>
-      <Typography variant="body2" align="center" mt={1}>
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-4">
+          <select
+            onChange={(e) => handleChangeRowsPerPage(e)}
+            value={rowsPerPage}
+            className="p-2 border border-gray-300 rounded-md text-sm text-gray-900"
+          >
+            {[10, 30, 40].map((option) => (
+              <option key={option} value={option}>
+                {option} rows
+              </option>
+            ))}
+          </select>
+          <p className="inline-block ml-4">
+            Rows per page: {rowsPerPage} / Page: {page + 1}
+          </p>
+          <div className="flex justify-end">
+            <button
+              className="px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-600"
+              onClick={() => handleChangePage(page - 1)}
+              disabled={page === 0}
+            >
+              Previous
+            </button>
+            <button
+              className="px-4 py-2 mt-4 ml-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md focus:outline-none focus:bg-blue-600"
+              onClick={() => handleChangePage(page + 1)}
+              disabled={rowsPerPage * (page + 1) >= rows.length}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+      <p className="text-center mt-4 text-sm text-gray-600">
         &copy; RMSI (Admin Dashboard) 2024
-      </Typography>
+      </p>
     </>
   );
 };
